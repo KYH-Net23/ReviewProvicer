@@ -15,17 +15,9 @@ namespace ReviewProvider.Contexts
         }
         public void MigrateData()
         {
-            if (_dbContext.Database.CanConnect())
-            {
-                _dbContext.Database.EnsureDeleted();
-                _dbContext.Database.EnsureCreated();
-            }
-            else
-            {
-                _dbContext.Database.Migrate();
-            }
             SeedProducts();
             SeedUsers();
+            SeedReviews();
             _dbContext.SaveChanges();
         }
 
@@ -111,6 +103,77 @@ namespace ReviewProvider.Contexts
                     LastName = "Robinson",
                     Email = "Johan@hotmail.com",
                     DateCreated = DateTime.Now,
+                }
+                );
+            }
+        }
+        private void SeedReviews()
+        {
+            if (!_dbContext.Reviews.Any())
+            {
+                _dbContext.AddRange(
+                new Review
+                {
+                    ReviewDescription = "Great product! Highly recommend.",
+                    Rating = 5,
+                    DateReviewed = DateTime.UtcNow,
+                    UserID = 10,
+                    ProductID = 13,
+                    Status = "Approved"
+                },
+                new Review
+                {
+                    ReviewDescription = "Decent quality, could be better.",
+                    Rating = 3,
+                    DateReviewed = DateTime.UtcNow,
+                    UserID = 11,
+                    ProductID = 14,
+                    Status = "Pending"
+                },
+                new Review
+                {
+                    ReviewDescription = "Decent quality, could be better.",
+                    Rating = 3,
+                    DateReviewed = DateTime.UtcNow,
+                    UserID = 11,
+                    ProductID = 14,
+                    Status = "Approved"
+                },
+                new Review
+                {
+                    ReviewDescription = "Decent quality, could be better.",
+                    Rating = 5,
+                    DateReviewed = DateTime.UtcNow,
+                    UserID = 12,
+                    ProductID = 16,
+                    Status = "Pending"
+                },
+                new Review
+                {
+                    ReviewDescription = "This product sucks.",
+                    Rating = 1,
+                    DateReviewed = DateTime.UtcNow,
+                    UserID = 12,
+                    ProductID = 15,
+                    Status = "Approved"
+                },
+                new Review
+                {
+                    ReviewDescription = "Decent quality, could be better.",
+                    Rating = 3,
+                    DateReviewed = DateTime.UtcNow,
+                    UserID = 10,
+                    ProductID = 14,
+                    Status = "Pending"
+                },
+                new Review
+                {
+                    ReviewDescription = "Nah quality, could not be better.",
+                    Rating = 4,
+                    DateReviewed = DateTime.UtcNow,
+                    UserID = 11,
+                    ProductID = 13,
+                    Status = "Pending"
                 }
                 );
             }

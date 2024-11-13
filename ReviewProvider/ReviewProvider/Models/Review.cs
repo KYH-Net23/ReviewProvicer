@@ -18,10 +18,14 @@ namespace ReviewProvider.Models
         public DateTime DateReviewed { get; set; } = DateTime.UtcNow;
 
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public int UserID { get; set; }
+
+        public User? User { get; set; }
 
         [ForeignKey("Product")]
         public int ProductID { get; set; }
+
+        public Product? Product { get; set; }
 
         [Required]
         public string? Status { get; set; }
